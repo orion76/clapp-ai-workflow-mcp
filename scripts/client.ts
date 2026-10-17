@@ -3,7 +3,7 @@
  *
  * This script is a development tool of the repository, not a part of the published package:
  * `files`/`bin` of the package do not mention `scripts/`, and `tsconfig.build.json` compiles
- * `src/**/*.ts` only, so nothing of it reaches `dist`.
+ * `src` TypeScript sources only, so nothing of it reaches `dist`.
  *
  * The client starts the server itself — `StdioClientTransport` launches the local `tsx` binary
  * from `node_modules/.bin` with the repository `tsconfig.dev.json` and the bin of the package,
