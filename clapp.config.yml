@@ -1,0 +1,15 @@
+# Configuration of the @clapp/ai-workflow-mcp server (see IAppConfig in @clapp/core).
+# Discovery patterns are relative to the application root: `src/` in development
+# and `dist/` in the built package, so the same patterns work in both modes.
+name: ai-workflow-mcp
+description: MCP server for AI-assisted development workflow automation (opencode artifacts)
+version: 0.0.1
+plugins:
+  PLUGIN_COMMAND:
+    patterns:
+      - commands/**/*.plugin.{js,ts}
+  PLUGIN_CONTEXT:
+    patterns: []
+  PLUGIN_FORMATTER:
+    patterns:
+      - formatters/**/*.plugin.{js,ts}

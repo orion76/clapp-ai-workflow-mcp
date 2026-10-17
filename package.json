@@ -1,0 +1,51 @@
+{
+  "name": "@clapp/ai-workflow-mcp",
+  "version": "0.0.1",
+  "type": "module",
+  "description": "MCP server for AI-assisted development workflow automation (opencode artifacts)",
+  "license": "MIT",
+  "author": "Paul Glazkow",
+  "files": [
+    "dist",
+    "clapp.config.yml"
+  ],
+  "bin": {
+    "clapp-ai-mcp": "./dist/bin/clapp-ai-mcp.js"
+  },
+  "keywords": [
+    "mcp",
+    "ai",
+    "opencode",
+    "skills",
+    "agent"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/orion76/clapp.git",
+    "directory": "packages/ai-workflow-mcp"
+  },
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "scripts": {
+    "build": "npm run clean && tsc -p tsconfig.build.json && chmod +x dist/bin/clapp-ai-mcp.js",
+    "clean": "rm -rf dist",
+    "test": "echo tests for clapp ai-workflow-mcp!"
+  },
+  "peerDependencies": {
+    "@clapp/command": "^0.0.3-alpha.14",
+    "@clapp/common": "^0.0.1",
+    "@clapp/core": "^0.0.7-alpha.16",
+    "inversify": "^8.2.3",
+    "reflect-metadata": "^0.2.2"
+  },
+  "dependencies": {
+    "@clapp/ai": "^0.0.1",
+    "@orion76/node-plugin": "^0.3.0",
+    "tslib": "^2.4.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.10.1",
+    "typescript": "^5.9.3"
+  }
+}
