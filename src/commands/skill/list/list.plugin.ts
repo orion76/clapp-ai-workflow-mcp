@@ -3,7 +3,7 @@ import path from 'node:path';
 import { injectable } from 'inversify';
 import { NodePlugin } from '@orion76/node-plugin';
 
-import { listAllSkills, listSkills, resolveSkillScope } from '@clapp/ai';
+import { listAllSkills, listSkills, resolveSkillScope } from '@clapp/ai-workflow-cli';
 import {
   COMMAND_KIND_RESOURCE,
   type ICommandResult,
