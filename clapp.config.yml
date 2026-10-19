@@ -1,15 +1,20 @@
 # Configuration of the @clapp/ai-workflow-mcp server (see IAppConfig in @clapp/core).
-# Discovery patterns are relative to the application root: `src/` in development
-# and `dist/` in the built package, so the same patterns work in both modes.
+# Discovery patterns are resolved with `path.resolve` against the application root — the
+# package directory that holds `plugins/` and this config file, never `process.cwd()`. The
+# host keeps its commands outside `src` (`src/bin` resolves the package root as the
+# application root), so the command pattern starts with `plugins/`. The MCP formatters are
+# per-file plugin modules of `@clapp/core`, so the formatter pattern points into the core
+# package of this monorepo (`../core/plugins/mcp-formatters/**`); the built core bundle is not
+# a discovery target.
 name: ai-workflow-mcp
 description: MCP server for AI-assisted development workflow automation (opencode artifacts)
 version: 0.0.1
 plugins:
   PLUGIN_COMMAND:
     patterns:
-      - commands/**/*.plugin.{js,ts}
+      - plugins/commands/**/*.plugin.{js,ts}
   PLUGIN_CONTEXT:
     patterns: []
   PLUGIN_FORMATTER:
     patterns:
-      - formatters/**/*.plugin.{js,ts}
+      - ../core/plugins/mcp-formatters/**/*.plugin.{js,ts}
