@@ -1,20 +1,59 @@
 # Configuration of the @clapp/ai-workflow-mcp server (see IAppConfig in @clapp/core).
-# Discovery patterns are resolved with `path.resolve` against the application root — the
-# package directory that holds this config file, never `process.cwd()`. Commands are the
-# plugins of the sibling library package `@clapp/ai-workflow-plugins`, so the command pattern
-# is anchored one level up (`../ai-workflow-plugins/plugins/commands/**`): the MCP host itself
-# no longer carries any command. The MCP formatters are per-file plugin modules of
-# `@clapp/core`, so the formatter pattern points into the core package of this monorepo
-# (`../core/plugins/mcp-formatters/**`); the built core bundle is not a discovery target.
+#
+# Plugins of every type come from **sources**, each anchored at its own root:
+#   - `appRoot`  — the package directory that holds this config file, never `process.cwd()`;
+#   - `library`  — the directory of the npm package named by `library`, resolved from the
+#                  application root through the `node_modules` chain (npm-workspaces hoisting
+#                  and monorepos work without relative paths);
+#   - `project`  — the root of the project the launcher runs in: the nearest `package.json`
+#                  above the working directory. Its plugins live in `plugins/<type>/**`; when
+#                  there is no project, the source is simply empty and the run does not fail.
+#
+# `disabled` is a list of plugin ids that are not loaded: per source it drops the ids of that
+# source, on the plugin type level it drops them from every source. A disabled id never raises
+# a duplicate/conflict error, so a project plugin can replace a library one.
+#
+# The MCP host carries no command of its own: the commands are plugins of the library package
+# `@clapp/ai-workflow-plugins`, while the MCP formatters and the contexts are per-file plugin
+# modules of `@clapp/core` (`src/plugins/**`); the built core bundle is not a discovery target.
+# The set of sources and the disable rules are identical to the CLI host.
 name: ai-workflow-mcp
 description: MCP server for AI-assisted development workflow automation (opencode artifacts)
 version: 0.0.1
 plugins:
   PLUGIN_COMMAND:
-    patterns:
-      - ../ai-workflow-plugins/plugins/commands/**/*.plugin.{js,ts}
+    disabled: []
+    sources:
+      - type: library
+        library: '@clapp/ai-workflow-plugins'
+        patterns:
+          - src/plugins/commands/**/*.plugin.{js,ts}
+        disabled: []
+      - type: project
+        patterns:
+          - plugins/commands/**/*.plugin.{js,ts}
+        disabled: []
   PLUGIN_CONTEXT:
-    patterns: []
+    disabled: []
+    sources:
+      - type: library
+        library: '@clapp/core'
+        patterns:
+          - src/plugins/context/**/*.context.{js,ts}
+        disabled: []
+      - type: project
+        patterns:
+          - plugins/context/**/*.context.{js,ts}
+        disabled: []
   PLUGIN_FORMATTER:
-    patterns:
-      - ../core/plugins/mcp-formatters/**/*.plugin.{js,ts}
+    disabled: []
+    sources:
+      - type: library
+        library: '@clapp/core'
+        patterns:
+          - src/plugins/mcp-formatters/**/*.plugin.{js,ts}
+        disabled: []
+      - type: project
+        patterns:
+          - plugins/formatters/**/*.plugin.{js,ts}
+        disabled: []
