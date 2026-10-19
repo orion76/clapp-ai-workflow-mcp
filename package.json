@@ -40,7 +40,7 @@
     "reflect-metadata": "^0.2.2"
   },
   "dependencies": {
-    "@clapp/ai-workflow-cli": "^0.0.1",
+    "@clapp/ai-workflow-plugins": "^0.0.1",
     "@orion76/node-plugin": "^0.3.0",
     "tslib": "^2.4.0"
   },
