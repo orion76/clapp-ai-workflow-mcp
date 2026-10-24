@@ -14,8 +14,9 @@
 # a duplicate/conflict error, so a project plugin can replace a library one.
 #
 # The MCP host carries no command of its own: the commands are plugins of the library package
-# `@clapp/ai-workflow-plugins`, while the MCP formatters and the contexts are per-file plugin
-# modules of `@clapp/core` (`src/plugins/**`); the built core bundle is not a discovery target.
+# `@clapp/ai-workflow-plugins`, while the MCP formatters are per-file plugin
+# modules of `@clapp/core` and the contexts of `@clapp/common`
+# (`packages/common/src/plugins/context/**`); the built core bundle is not a discovery target.
 # The set of sources and the disable rules are identical to the CLI host.
 name: ai-workflow-mcp
 description: MCP server for AI-assisted development workflow automation (opencode artifacts)
@@ -37,7 +38,7 @@ plugins:
     disabled: []
     sources:
       - type: library
-        library: '@clapp/core'
+        library: '@clapp/common'
         patterns:
           - src/plugins/context/**/*.context.{js,ts}
         disabled: []
