@@ -33,14 +33,14 @@
     "test": "echo tests for clapp ai-workflow-mcp!"
   },
   "peerDependencies": {
-    "@clapp/common": "^0.0.1",
-    "@clapp/core": "^0.0.7-alpha.16",
+    "@clapp/common": "workspace:*",
+    "@clapp/core": "workspace:*",
     "inversify": "^8.2.3",
     "reflect-metadata": "^0.2.2"
   },
   "dependencies": {
-    "@clapp/ai-workflow-plugins": "^0.0.1",
-    "@orion76/node-plugin": "^0.3.0",
+    "@clapp/ai-workflow-plugins": "workspace:*",
+    "@orion76/node-plugin": "workspace:*",
     "tslib": "^2.4.0"
   },
   "devDependencies": {

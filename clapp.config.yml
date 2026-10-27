@@ -9,9 +9,6 @@
 #                  above the working directory. Its plugins live in `plugins/<type>/**`; when
 #                  there is no project, the source is simply empty and the run does not fail.
 #
-# `disabled` is a list of plugin ids that are not loaded: per source it drops the ids of that
-# source, on the plugin type level it drops them from every source. A disabled id never raises
-# a duplicate/conflict error, so a project plugin can replace a library one.
 #
 # The MCP host carries no command of its own: the commands are plugins of the library package
 # `@clapp/ai-workflow-plugins`, while the MCP formatters are per-file plugin
@@ -23,38 +20,38 @@ description: MCP server for AI-assisted development workflow automation (opencod
 version: 0.0.1
 plugins:
   PLUGIN_COMMAND:
-    disabled: []
     sources:
       - type: library
         library: '@clapp/ai-workflow-plugins'
         patterns:
           - src/plugins/commands/**/*.plugin.{js,ts}
-        disabled: []
       - type: project
         patterns:
           - plugins/commands/**/*.plugin.{js,ts}
-        disabled: []
+  PLUGIN_COMMAND_ARGUMENT:
+    sources:
+      - type: library
+        library: '@clapp/common'
+        patterns:
+          - src/plugins/command-argument/**/*.plugin.{js,ts}
+      - type: project
+        patterns:
+          - plugins/command-argument/**/*.plugin.{js,ts}
   PLUGIN_CONTEXT:
-    disabled: []
     sources:
       - type: library
         library: '@clapp/common'
         patterns:
           - src/plugins/context/**/*.context.{js,ts}
-        disabled: []
       - type: project
         patterns:
           - plugins/context/**/*.context.{js,ts}
-        disabled: []
   PLUGIN_FORMATTER:
-    disabled: []
     sources:
       - type: library
         library: '@clapp/core'
         patterns:
           - src/plugins/mcp-formatters/**/*.plugin.{js,ts}
-        disabled: []
       - type: project
         patterns:
           - plugins/formatters/**/*.plugin.{js,ts}
-        disabled: []

@@ -8,9 +8,9 @@
     "sourceMap": true,
     "types": ["node"],
     "paths": {
-      "@clapp/common": ["../common/dist/clapp-common.d.ts"],
-      "@clapp/core": ["../core/dist/clapp-core.d.ts"],
-      "@clapp/utils": ["../utils/dist/clapp-utils.d.ts"]
+      "@clapp/common": ["../common/src/public-api.ts"],
+      "@clapp/core": ["../core/src/public-api.ts"],
+      "@clapp/utils": ["../utils/src/public-api.ts"]
     }
   },
   "include": ["src/**/*.ts"]
