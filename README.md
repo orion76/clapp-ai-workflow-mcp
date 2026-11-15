@@ -2,6 +2,8 @@
 
 > ⚠️ **В разработке.** Пакет ещё не готов к релизу: релиз ожидается в ближайшее время, API может меняться. Использовать в продакшне пока нельзя.
 
+**English** | [Русский](./docs/ru/README.md)
+
 # @clapp/ai-workflow-mcp
 
 The `clapp-ai-mcp` MCP server of the AI-assisted development workflow: the same command plugins as the `clapp-ai` CLI, exposed over the Model Context Protocol through the `MCPEngine` of `@clapp/core`. The package is a thin host of the [`orion76/clapp`](https://github.com/orion76/clapp) monorepo — it carries no command of its own, only the `bin`, its `clapp.config.yml` and the plugin sources that config declares.
@@ -63,10 +65,6 @@ The entities a client sees, by surface:
 | [`@clapp/utils`](https://www.npmjs.com/package/@clapp/utils)                 | [`orion76/clapp-utils`](https://github.com/orion76/clapp-utils)                           |
 | [`@clapp/ai-workflow-plugins`](https://www.npmjs.com/package/@clapp/ai-workflow-plugins) | [`orion76/clapp-ai-workflow-plugins`](https://github.com/orion76/clapp-ai-workflow-plugins) |
 | [`@clapp/ai-workflow-cli`](https://www.npmjs.com/package/@clapp/ai-workflow-cli) | [`orion76/clapp-ai-workflow-cli`](https://github.com/orion76/clapp-ai-workflow-cli)       |
-
-## Русский
-
-`@clapp/ai-workflow-mcp` — MCP-сервер `clapp-ai-mcp` для AI-workflow: тот же набор плагинов, что и у CLI-хоста, поднятый через `MCPEngine` пакета `@clapp/core`. Команды попадают на разные поверхности MCP по своему виду: инструменты (`init`, `skill/add`, `task/add`), ресурсы (`task/list`, `skill/list`, `board/next` и другие) и подсказка `brief`. Результат команды клиент получает в том же виде, в каком его напечатал бы CLI: он проходит через форматтер, объявленный в описании команды. Пакет находится в активной разработке и ещё не опубликован в npm. Релиз ожидается в ближайшее время, но состав команд и API могут меняться без предупреждения. Использовать в продакшне пока нельзя.
 
 ## License
 
