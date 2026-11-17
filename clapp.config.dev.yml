@@ -1,0 +1,51 @@
+# Development configuration of the @clapp/ai-workflow-mcp server (see IAppConfig in @clapp/core).
+#
+# Selected when the server runs in development mode (`CLAPP_MODE=development`); it
+# replaces `clapp.config.yml`, which stays the production config. The plugin packages
+# are taken from the monorepo checkouts through `path` sources instead of the installed
+# copies, so `packages/*/node_modules/@clapp/*` links are not required for a dev run.
+#
+# A `path` source is anchored at the directory it names, resolved from the application
+# root (the package directory that holds this file, never `process.cwd()`); `patterns`
+# are the same as in `clapp.config.yml`. A missing directory is not an error — the
+# source just matches nothing. The set of sources is identical to the CLI host.
+name: ai-workflow-mcp
+description: MCP server for AI-assisted development workflow automation (opencode artifacts)
+version: 0.0.1
+plugins:
+  PLUGIN_COMMAND:
+    sources:
+      - type: path
+        path: ../ai-workflow-plugins
+        patterns:
+          - src/plugins/commands/**/*.plugin.{js,ts}
+      - type: project
+        patterns:
+          - plugins/commands/**/*.plugin.{js,ts}
+  PLUGIN_COMMAND_ARGUMENT:
+    sources:
+      - type: path
+        path: ../common
+        patterns:
+          - src/plugins/command-argument/**/*.plugin.{js,ts}
+      - type: project
+        patterns:
+          - plugins/command-argument/**/*.plugin.{js,ts}
+  PLUGIN_CONTEXT:
+    sources:
+      - type: path
+        path: ../common
+        patterns:
+          - src/plugins/context/**/*.context.{js,ts}
+      - type: project
+        patterns:
+          - plugins/context/**/*.context.{js,ts}
+  PLUGIN_FORMATTER:
+    sources:
+      - type: path
+        path: ../common
+        patterns:
+          - src/plugins/mcp-formatters/**/*.plugin.{js,ts}
+      - type: project
+        patterns:
+          - plugins/formatters/**/*.plugin.{js,ts}
