@@ -28,6 +28,12 @@ The package is not published to npm yet, so `npm install @clapp/ai-workflow-mcp`
 npm install @clapp/ai-workflow-mcp
 ```
 
+Running the server from sources also requires the sibling repository `~/my/@orion76`: the
+`@orion76/*` packages (`node-plugin`, `plugin`, `logger`) are wired as `link:../@orion76/projects/*`
+dependencies and their sources are referenced by the workspace `tsconfig` paths. A checkout without
+that sibling cannot run the server. Under the release model the dependency is installed from the
+local npm registry instead of the link (task `packages-registry-flow`).
+
 ## Usage
 
 Register the server in an MCP client configuration:
