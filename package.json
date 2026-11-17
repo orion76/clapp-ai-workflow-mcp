@@ -40,7 +40,7 @@
   },
   "dependencies": {
     "@clapp/ai-workflow-plugins": "workspace:*",
-    "@orion76/node-plugin": "workspace:*",
+    "@orion76/node-plugin": "link:../../../@orion76/projects/node-plugin",
     "tslib": "^2.4.0"
   },
   "devDependencies": {

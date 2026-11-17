@@ -6,7 +6,9 @@
 
 # @clapp/ai-workflow-mcp
 
-The `clapp-ai-mcp` MCP server of the AI-assisted development workflow: the same command plugins as the `clapp-ai` CLI, exposed over the Model Context Protocol through the `MCPEngine` of `@clapp/core`. The package is a thin host of the [`orion76/clapp`](https://github.com/orion76/clapp) monorepo — it carries no command of its own, only the `bin`, its `clapp.config.yml` and the plugin sources that config declares.
+The package is published from its own repository, [`orion76/clapp-ai-workflow-mcp`](https://github.com/orion76/clapp-ai-workflow-mcp); it is developed together with the `clapp` host workspace ([`orion76/clapp`](https://github.com/orion76/clapp)).
+
+The `clapp-ai-mcp` MCP server of the AI-assisted development workflow: the same command plugins as the `clapp-ai` CLI, exposed over the Model Context Protocol through the `MCPEngine` of `@clapp/core`. The package is a thin host of the `clapp` host workspace — it carries no command of its own, only the `bin`, its `clapp.config.yml` and the plugin sources that config declares.
 
 ## Features
 
@@ -20,7 +22,7 @@ The `clapp-ai-mcp` MCP server of the AI-assisted development workflow: the same 
 
 ## Installation
 
-The package is not published to npm yet, so `npm install @clapp/ai-workflow-mcp` does not resolve until the first release. Until then it is consumed as a workspace package of the monorepo:
+The package is not published to npm yet, so `npm install @clapp/ai-workflow-mcp` does not resolve until the first release. Until then it is consumed as a workspace package of the `clapp` host workspace ([`orion76/clapp`](https://github.com/orion76/clapp)):
 
 ```bash
 npm install @clapp/ai-workflow-mcp
@@ -41,7 +43,7 @@ Register the server in an MCP client configuration:
 }
 ```
 
-The server speaks the protocol over stdio and writes diagnostics to stderr only, so stdout stays clean for the protocol stream. Inside the monorepo it runs from the sources without a build step:
+The server speaks the protocol over stdio and writes diagnostics to stderr only, so stdout stays clean for the protocol stream. Inside the `clapp` host workspace it runs from the sources without a build step:
 
 ```bash
 npm run start:ai-mcp
