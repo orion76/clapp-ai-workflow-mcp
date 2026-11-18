@@ -13,16 +13,16 @@ name: ai-workflow-mcp
 description: MCP server for AI-assisted development workflow automation (opencode artifacts)
 version: 0.0.1
 plugins:
-  PLUGIN_COMMAND:
+  command:
     sources:
       - type: path
         path: ../ai-workflow-plugins
         patterns:
-          - src/plugins/commands/**/*.plugin.{js,ts}
+          - src/plugins/command/**/*.plugin.{js,ts}
       - type: project
         patterns:
-          - plugins/commands/**/*.plugin.{js,ts}
-  PLUGIN_COMMAND_ARGUMENT:
+          - plugins/command/**/*.plugin.{js,ts}
+  command-argument:
     sources:
       - type: path
         path: ../common
@@ -31,7 +31,7 @@ plugins:
       - type: project
         patterns:
           - plugins/command-argument/**/*.plugin.{js,ts}
-  PLUGIN_CONTEXT:
+  context:
     sources:
       - type: path
         path: ../common
@@ -40,12 +40,12 @@ plugins:
       - type: project
         patterns:
           - plugins/context/**/*.context.{js,ts}
-  PLUGIN_FORMATTER:
+  formatter:
     sources:
       - type: path
         path: ../common
         patterns:
-          - src/plugins/mcp-formatters/**/*.plugin.{js,ts}
+          - src/plugins/formatter/mcp/**/*.plugin.{js,ts}
       - type: project
         patterns:
-          - plugins/formatters/**/*.plugin.{js,ts}
+          - plugins/formatter/**/*.plugin.{js,ts}

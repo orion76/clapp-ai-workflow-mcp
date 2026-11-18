@@ -12,7 +12,7 @@
 #
 # The MCP host carries no command of its own: the commands are plugins of the library package
 # `@clapp/ai-workflow-plugins`, while the MCP formatters are per-file plugin modules of
-# `@clapp/common` (`packages/common/src/plugins/mcp-formatters/**`) and the contexts of
+# `@clapp/common` (`packages/common/src/plugins/formatter/mcp/**`) and the contexts of
 # `@clapp/common` (`packages/common/src/plugins/context/**`); the built bundles are not
 # discovery targets.
 # The set of sources and the disable rules are identical to the CLI host.
@@ -20,16 +20,16 @@ name: ai-workflow-mcp
 description: MCP server for AI-assisted development workflow automation (opencode artifacts)
 version: 0.0.1
 plugins:
-  PLUGIN_COMMAND:
+  command:
     sources:
       - type: library
         library: '@clapp/ai-workflow-plugins'
         patterns:
-          - src/plugins/commands/**/*.plugin.{js,ts}
+          - src/plugins/command/**/*.plugin.{js,ts}
       - type: project
         patterns:
-          - plugins/commands/**/*.plugin.{js,ts}
-  PLUGIN_COMMAND_ARGUMENT:
+          - plugins/command/**/*.plugin.{js,ts}
+  command-argument:
     sources:
       - type: library
         library: '@clapp/common'
@@ -38,7 +38,7 @@ plugins:
       - type: project
         patterns:
           - plugins/command-argument/**/*.plugin.{js,ts}
-  PLUGIN_CONTEXT:
+  context:
     sources:
       - type: library
         library: '@clapp/common'
@@ -47,12 +47,12 @@ plugins:
       - type: project
         patterns:
           - plugins/context/**/*.context.{js,ts}
-  PLUGIN_FORMATTER:
+  formatter:
     sources:
       - type: library
         library: '@clapp/common'
         patterns:
-          - src/plugins/mcp-formatters/**/*.plugin.{js,ts}
+          - src/plugins/formatter/mcp/**/*.plugin.{js,ts}
       - type: project
         patterns:
-          - plugins/formatters/**/*.plugin.{js,ts}
+          - plugins/formatter/**/*.plugin.{js,ts}
