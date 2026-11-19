@@ -9,12 +9,28 @@
 #                  above the working directory. Its plugins live in `plugins/<type>/**`; when
 #                  there is no project, the source is simply empty and the run does not fail.
 #
+# The `schemas` section (`ISchemaConfig`, next to `plugins`) declares the data schemas of the
+# commands:
+#   - `sources` — a list of the same kind as the sources of a plugin type; its patterns point
+#                 at the schema files, which live in `schemas/**` of the root of their source.
+#                 The schemas of `@clapp/ai-workflow-plugins` come from that package, the ones
+#                 of a project from `schemas/**` of the project root (empty when absent);
+#   - `formatters` — the map from the `$id` of a schema to the id of the formatter plugin that
+#                 renders the data it describes. A command names the shape of its data with
+#                 `dataSchema`, and this map decides which formatter renders it, so a command
+#                 stays independent of the formatter set a host loads. The ids below are the
+#                 same as in the CLI host, but the discovery patterns of `formatter` point at
+#                 the MCP set (`src/plugins/formatter/mcp/**`), so the map resolves to the
+#                 plain-text formatters of the protocol stream. A schema id without a file, a
+#                 duplicate `$id` and a formatter id that no loaded plugin carries fail the
+#                 start-up; a command whose schema has no entry in the map is skipped and the
+#                 reason is reported.
 #
 # The MCP host carries no command of its own: the commands are plugins of the library package
-# `@clapp/ai-workflow-plugins`, while the MCP formatters are per-file plugin modules of
-# `@clapp/common` (`packages/common/src/plugins/formatter/mcp/**`) and the contexts of
-# `@clapp/common` (`packages/common/src/plugins/context/**`); the built bundles are not
-# discovery targets.
+# `@clapp/ai-workflow-plugins` with their schemas in `schemas/**` of that package, while the
+# MCP formatters are per-file plugin modules of `@clapp/common`
+# (`packages/common/src/plugins/formatter/mcp/**`) and the contexts of `@clapp/common`
+# (`packages/common/src/plugins/context/**`); the built bundles are not discovery targets.
 # The set of sources and the disable rules are identical to the CLI host.
 name: ai-workflow-mcp
 description: MCP server for AI-assisted development workflow automation (opencode artifacts)
@@ -56,3 +72,21 @@ plugins:
       - type: project
         patterns:
           - plugins/formatter/**/*.plugin.{js,ts}
+schemas:
+  sources:
+    - type: library
+      library: '@clapp/ai-workflow-plugins'
+      patterns:
+        - schemas/**/*.schema.yml
+    - type: project
+      patterns:
+        - schemas/**/*.schema.yml
+  formatters:
+    task-list: table
+    task-todo: table
+    skill-list: table
+    task-add: key-value
+    skill-add: key-value
+    npm-info: key-value
+    init: key-value
+    brief: ordered-list
