@@ -49,3 +49,26 @@ plugins:
       - type: project
         patterns:
           - plugins/formatter/**/*.plugin.{js,ts}
+# The `schemas` section mirrors `clapp.config.yml` with the same `path`-instead-of-`library`
+# substitution as the plugin sources above: the schema files are read from the
+# `packages/ai-workflow-plugins` checkout, so a dev run needs no installed copy of the
+# package. The formatter map keeps the ids of `clapp.config.yml`, and the MCP set loaded by
+# the `formatter` patterns above renders them as plain text for the protocol stream.
+schemas:
+  sources:
+    - type: path
+      path: ../ai-workflow-plugins
+      patterns:
+        - schemas/**/*.schema.yml
+    - type: project
+      patterns:
+        - schemas/**/*.schema.yml
+  formatters:
+    task-list: table
+    task-todo: table
+    skill-list: table
+    task-add: key-value
+    skill-add: key-value
+    npm-info: key-value
+    init: key-value
+    brief: ordered-list
